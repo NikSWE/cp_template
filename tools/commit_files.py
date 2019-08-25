@@ -3,7 +3,6 @@ from git import Repo
 from datetime import datetime
 from pathlib import Path
 from subprocess import call
-from os import stat
 
 repo = Repo(path=const.REPO_PATH)
 
@@ -58,7 +57,5 @@ untracked_files = repo.untracked_files
 print("Modified Files:", commit_files(modified_files))
 print("Untracked Files:", commit_files(untracked_files))
 
-# check if log file is empty
-if stat("{}/{}.log".format(const.LOG_PATH, now)).st_size == 0:
-    log_file.write("Everything up-to-date")
+call(["git", "push", "origin", "master"], stdout=log_file, cwd=const.REPO_PATH)
 log_file.close()
