@@ -49,6 +49,7 @@ def commit_files(files):
 
     return count
 
+
 # list containing modified files
 modified_files = [item.a_path for item in repo.index.diff(None)]
 # list containing untracked files
@@ -57,5 +58,5 @@ untracked_files = repo.untracked_files
 print("Modified Files:", commit_files(modified_files))
 print("Untracked Files:", commit_files(untracked_files))
 
-call(["git", "push", "origin", "master"], stdout=log_file, cwd=const.REPO_PATH)
+call(["git", "push", "origin", "master"], stderr=log_file, cwd=const.REPO_PATH)
 log_file.close()
