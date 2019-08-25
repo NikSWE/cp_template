@@ -11,7 +11,6 @@ cross="\xe2\x9c\x97"
 error="\033[0;31m"
 success="\033[0;32m"
 reset="\033[0m"
-origin=$1
 
 # check if package is available
 is_available() {
@@ -52,6 +51,24 @@ is_compatible() {
 }
 
 # ==== Check Dependencies ==== #
+# check for wget requirements
+wget_cmd=$(wget --version &>/dev/null)
+
+is_available "wget"
+
+# check if user provided remote url
+if (($# != 1)); then
+    echo "$error[$cross]$reset remote repository url missing"
+    exit 1
+else
+    # check if remote url exists
+    wget -q --spider $1
+    is_available "remote url"
+
+    echo "$success[$tick]$reset remote repository url is accessible"
+    origin=$1
+fi
+
 # check for git requirements
 git_cmd=$(git --version 2>/dev/null)
 
@@ -75,19 +92,19 @@ is_compatible $python_version "3.4.0" "python"
 rm -rf .git
 
 echo "$success[$tick]$reset initialized new git repo"
-git init &> /dev/null
+git init &>/dev/null
 
 # add origin to remote
 git remote add origin $origin
 
 # create a initial commit
-git add -A &> /dev/null
-git commit -m "initial commit from install script" &> /dev/null
+git add -A &>/dev/null
+git commit -m "initial commit from install script" &>/dev/null
 
 echo "$success[$tick]$reset created a initial commit"
 
 # push to the remote
-git push origin master &> /dev/null
+git push origin master &>/dev/null
 
 echo "$success[$tick]$reset pushed to the remote"
 
