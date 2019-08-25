@@ -99,7 +99,7 @@ python3 ./tools/create_alias.py >>$shell_config
 echo "$success[$tick]$reset created aliases"
 
 # ==== Get Dependencies ==== #
-pip3 install -r requirements.txt 2>/dev/null
+pip3 install -r requirements.txt 1>/dev/null
 echo "$success[$tick]$reset installed all the dependencies"
 
 # ==== Housekeeping ==== #
