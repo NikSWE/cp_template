@@ -21,7 +21,7 @@ def commit_files(files):
         solution_abbr = None
 
         with open(Path(const.REPO_PATH).joinpath(f)) as target:
-            solution_abbr = target.readline().strip("#").split()[0]
+            solution_abbr = target.readline().split()[1]
             if solution_abbr == 'PVT':
                 continue
 
