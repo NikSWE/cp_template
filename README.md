@@ -37,7 +37,7 @@ cd <your_repo_name>
 
 ## Run the `install` Script
 
-So you are almost done :hourglass:, Set up your template with this command
+You are almost done :hourglass:, Set up your template with this command
 
 ```bash
 sh install.sh <remote_url>
