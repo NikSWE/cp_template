@@ -11,6 +11,7 @@ cross="\xe2\x9c\x97"
 error="\033[0;31m"
 success="\033[0;32m"
 reset="\033[0m"
+origin=$1
 
 # check if package is available
 is_available() {
@@ -68,3 +69,28 @@ is_available "python3"
 python_version=$(echo $python_cmd | cut -d " " -f 2)
 
 is_compatible $python_version "3.4.0" "python"
+
+# ==== Housekeeping ==== #
+# remove .git
+rm -rf .git
+
+echo "$success[$tick]$reset initialized new git repo"
+git init &> /dev/null
+
+# add origin to remote
+git remote add origin $origin
+
+# create a initial commit
+git add -A &> /dev/null
+git commit -m "initial commit from install script" &> /dev/null
+
+echo "$success[$tick]$reset created a initial commit"
+
+# push to the remote
+git push origin master &> /dev/null
+
+echo "$success[$tick]$reset pushed to the remote"
+
+echo "\n Setup is complete 🔥"
+echo "\n Would love it if you 🌟  the repo << https://github.com/muj-programmer/cp_solutions >>"
+echo " Have a nice day! 🤗"
