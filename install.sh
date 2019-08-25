@@ -1,4 +1,4 @@
-# Nikhil Anand <https://github.com/muj-programmer/cp_solutions>
+# Nikhil Anand <https://github.com/muj-programmer>
 #
 # script to check for required packages,
 # setup the template git repository and
@@ -122,5 +122,5 @@ git push origin master &>/dev/null
 echo "$success[$tick]$reset pushed to the remote"
 
 echo "\n Setup is complete 🔥"
-echo "\n Would love it if you 🌟  the repo << https://github.com/muj-programmer/cp_solutions >>"
+echo "\n Would love it if you 🌟  the repo << https://github.com/muj-programmer/cp_template >>"
 echo " Have a nice day! 🤗"
