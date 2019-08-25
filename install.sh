@@ -50,6 +50,13 @@ is_compatible() {
     fi
 }
 
+# check user's shell
+shell=$(echo $SHELL | grep -oE "(zsh|bash)$" 2>/dev/null)
+
+is_available "required shell"
+
+shell_config="$HOME/.${shell}rc"
+
 # ==== Check Dependencies ==== #
 # check for wget requirements
 wget_cmd=$(wget --version &>/dev/null)
@@ -86,6 +93,9 @@ is_available "python3"
 python_version=$(echo $python_cmd | cut -d " " -f 2)
 
 is_compatible $python_version "3.4.0" "python"
+
+# ==== Edit Shell Config File ==== #
+python3 ./tools/create_alias.py >>$shell_config
 
 # ==== Housekeeping ==== #
 # remove .git
