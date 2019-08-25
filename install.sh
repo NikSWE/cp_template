@@ -97,6 +97,9 @@ is_compatible $python_version "3.4.0" "python"
 # ==== Edit Shell Config File ==== #
 python3 ./tools/create_alias.py >>$shell_config
 
+# ==== Get Dependencies ==== #
+pip3 install -r requirements.txt
+
 # ==== Housekeeping ==== #
 # remove .git
 rm -rf .git
