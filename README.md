@@ -45,6 +45,20 @@ sh install.sh <remote_url>
 
 **Note:** So you remember you created a new repo on your git hosting service, Well now you need to get the _url_ of that and replace it with `<remote_url>`
 
+## How-To-Use
+
+The setup is complete, you should see an initial commit in your local repo as well as remote repo.
+
+__3__ new aliases have been created for you to interact with your template. (_it's placed in your shell config file_)
+
+| alias  | purpose                      |
+|--------|------------------------------|
+| `csf`  | create new solution file     |
+| `psf`  | push changes to remote repo  |
+| `rmlf` | remove log files in tool dir |
+
+__Note:__ check out the [wiki](https://github.com/muj-programmer/cp_template/wiki) for a tutorial.
+
 ## Commit Emojis
 
 You have probably come across a lot of emojis in the commit history or while browsing the repository and tried to figure out what does it imply.
