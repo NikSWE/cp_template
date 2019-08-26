@@ -47,9 +47,9 @@ sh install.sh <remote_url>
 
 ## How-To-Use
 
-The setup is complete, you should see an initial commit in your local repo as well as remote repo.
+The _setup is complete_ :100:, you should see an __initial commit__ in your _local repo_ as well as _remote repo_.
 
-__3__ new aliases have been created for you to interact with your template. (_it's placed in your shell config file_)
+__3__ new aliases have been created for you :fire: to interact with your template. (_it's placed in your shell config file_)
 
 | alias  | purpose                      |
 |--------|------------------------------|
