@@ -6,8 +6,8 @@
 
 # ==== Helper Methods ==== #
 # constants
-tick="\xE2\x9C\x93"
-cross="\xe2\x9c\x97"
+tick="✓"
+cross="✗"
 error="\033[0;31m"
 success="\033[0;32m"
 reset="\033[0m"
@@ -58,23 +58,29 @@ is_available "required shell"
 shell_config="$HOME/.${shell}rc"
 
 # ==== Check Dependencies ==== #
+# check if user provided remote url
+if [ $# -ne 1 ]; then
+    echo "usage: install.sh <remote_repo_url>"
+    exit 1
+fi
+
 # check for wget requirements
-wget_cmd=$(wget --version &>/dev/null)
+wget_cmd=$(wget --version 2>/dev/null)
 
 is_available "wget"
 
-# check if user provided remote url
-if (($# != 1)); then
-    echo "$error[$cross]$reset remote repository url missing"
-    exit 1
-else
-    # check if remote url exists
-    wget -q --spider $1
-    is_available "remote url"
+wget_version=$(echo $wget_cmd | cut -d " " -f 3 | head -n 1)
 
-    echo "$success[$tick]$reset remote repository url is accessible"
-    origin=$1
-fi
+is_compatible $wget_version "0.0.0" "git"
+
+# check if remote url exists
+wget -q --spider $1
+
+is_available "remote repository url"
+
+echo "$success[$tick]$reset remote repository url is accessible"
+
+origin=$1
 
 # check for git requirements
 git_cmd=$(git --version 2>/dev/null)
@@ -85,6 +91,23 @@ git_version=$(echo $git_cmd | cut -d " " -f 3)
 
 is_compatible $git_version "1.17.0" "git"
 
+# check if git is configured on the system
+git_user_name=$(git config --global user.name)
+
+if [ -z $git_user_name ]; then
+    echo "$error[$cross]$reset git \`user.name\` not found"
+    exit 1
+fi
+
+git_user_email=$(git config --global user.email)
+
+if [ -z $git_user_email ]; then
+    echo "$error[$cross]$reset git \`user.email\` not found"
+    exit 1
+fi
+
+echo "$success[$tick]$reset git is configured"
+
 # check for python3 requirements
 python_cmd=$(python3 --version 2>/dev/null)
 
@@ -93,6 +116,15 @@ is_available "python3"
 python_version=$(echo $python_cmd | cut -d " " -f 2)
 
 is_compatible $python_version "3.4.0" "python"
+
+# check for pip3 requirements
+pip_cmd=$(pip3 --version 2>/dev/null)
+
+is_available "pip3"
+
+pip_version=$(echo $pip_cmd | cut -d " " -f 2)
+
+is_compatible $pip_version "0.0.0" "pip"
 
 # ==== Edit Shell Config File ==== #
 python3 ./tools/create_alias.py >>$shell_config
